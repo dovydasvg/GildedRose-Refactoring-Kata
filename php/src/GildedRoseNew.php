@@ -71,12 +71,12 @@ final class GildedRoseNew
                     The sellin gets lower so an additional 1 is added.
                      */
 
-                    if($sellin < 2 ){
+                    if($sellin < 1 ){
                         $item->quality = 0;
                         $ChangeQuality = 0;
-                    }elseif($sellin < 7){
+                    }elseif($sellin < 6){
                         $ChangeQuality = 3;
-                    }elseif ($sellin < 12){
+                    }elseif ($sellin < 11){
                         $ChangeQuality = 2;
                     }else{
                         $ChangeQuality = 1;
