@@ -8,7 +8,6 @@ use GildedRose\GildedRose;
 use GildedRose\Item;
 use PHPUnit\Framework\TestCase;
 
-use GildedRose\GildedRoseNew;
 
 class GildedRoseTest extends TestCase
 {
@@ -31,7 +30,7 @@ class GildedRoseTest extends TestCase
             new Item('Shitty default item', 5, 0),
             new Item('Fast degrading default item', -5, 20),
         );
-        $gildedRose = new GildedRoseNew($items);
+        $gildedRose = new GildedRose($items);
         $gildedRose->updateQuality();
 
         $this->assertEquals(9, $items[0]->sell_in);
@@ -48,7 +47,7 @@ class GildedRoseTest extends TestCase
     public function testSulfuras(): void
     {
         $items = [new Item('Sulfuras, Hand of Ragnaros', 0, 80)];
-        $gildedRose = new GildedRoseNew($items);
+        $gildedRose = new GildedRose($items);
         $gildedRose->updateQuality();
         $this->assertSame('Sulfuras, Hand of Ragnaros', $items[0]->name);
         $this->assertEquals(0, $items[0]->sell_in);
@@ -62,7 +61,7 @@ class GildedRoseTest extends TestCase
             new Item('Aged Brie', 10, 15),
             new Item('Aged Brie', -5, 20),
         );
-        $gildedRose = new GildedRoseNew($items);
+        $gildedRose = new GildedRose($items);
         $gildedRose->updateQuality();
 
         $this->assertEquals(9, $items[0]->sell_in);
@@ -85,7 +84,7 @@ class GildedRoseTest extends TestCase
             new Item('Backstage passes to a Great concert', 5, 49),
             new Item('Backstage passes to a Random concert', 1, 40),
         );
-        $gildedRose = new GildedRoseNew($items);
+        $gildedRose = new GildedRose($items);
         $gildedRose->updateQuality();
         $this->assertEquals(14, $items[0]->sell_in);
         $this->assertEquals(21, $items[0]->quality);
@@ -110,7 +109,7 @@ class GildedRoseTest extends TestCase
             new Item('Conjured vase', 15, 20),
             new Item('Conjured silver sword', -2, 20),
         );
-        $gildedRose = new GildedRoseNew($items);
+        $gildedRose = new GildedRose($items);
         $gildedRose->updateQuality();
         $this->assertEquals(14, $items[0]->sell_in);
         $this->assertEquals(18, $items[0]->quality);
