@@ -50,7 +50,7 @@ final class GildedRoseNew
                     if($sellin > 0){
                         $sellin = 0;
                     }
-                    $quality = 80;
+                    $item->quality = 80;
                     continue 2;
 
                 default:
@@ -63,8 +63,8 @@ final class GildedRoseNew
             In case of additional updates needed - add them here.
             */
 
-            $sellin += $ChangeSellin;
-            $quality += $ChangeQuality;
+            $item->sell_in += $ChangeSellin;
+            $item->quality += $ChangeQuality;
 
             /* Sulfuras (aka legendary item) must always remain 80 in quality and never be sold. */
 
