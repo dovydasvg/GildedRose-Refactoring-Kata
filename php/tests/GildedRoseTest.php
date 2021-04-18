@@ -22,6 +22,18 @@ class GildedRoseTest extends TestCase
         $this->assertEquals(0, $items[0]->quality);
     }
 
+    /* Default test */
+
+    public function testDefault(): void
+    {
+        $items = [new Item('Random default item', 10, 40)];
+        $gildedRose = new GildedRoseNew($items);
+        $gildedRose->updateQuality();
+        $this->assertSame('Random default item', $items[0]->name);
+        $this->assertEquals(9, $items[0]->sell_in);
+        $this->assertEquals(39, $items[0]->quality);
+    }
+
     /* Sulfuras must never be sold and keep a quality of 80*/
     public function testSulfuras(): void
     {
@@ -32,4 +44,5 @@ class GildedRoseTest extends TestCase
         $this->assertEquals(0, $items[0]->sell_in);
         $this->assertEquals(80, $items[0]->quality);
     }
+
 }
