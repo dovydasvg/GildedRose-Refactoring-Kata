@@ -16,16 +16,14 @@ final class GildedRose
         $this->items = $items;
     }
 
-    /**
-     * @noinspection PhpUnusedLocalVariableInspection
-     */
+
     public function updateQuality(): void
     {
         /**
-         * @var Item
-         * @name = string
-         * @sell_in = int
-         * @qyality = int
+         * Item parameters:
+         * name = string
+         * sell_in = int
+         * quality = int
          */
 
         foreach ($this->items as $item) {
@@ -52,7 +50,7 @@ final class GildedRose
 
                     // Prevents Sulfuras from being sold.
                     if ($sellin > 0) {
-                        $sellin = 0;
+                        $item->sell_in = 0;
                     }
                     $item->quality = 80;
                     continue 2;
