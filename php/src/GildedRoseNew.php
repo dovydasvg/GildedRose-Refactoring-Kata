@@ -18,52 +18,57 @@ final class GildedRoseNew
 
     public function updateQuality(): void
     {
+        /**
+         * @var Item
+         * @name = string
+         * @sell_in = int
+         * @qyality = int
+         */
+
         foreach ($this->items as $item) {
-            if ($item->name != 'Aged Brie' and $item->name != 'Backstage passes to a TAFKAL80ETC concert') {
-                if ($item->quality > 0) {
-                    if ($item->name != 'Sulfuras, Hand of Ragnaros') {
-                        $item->quality = $item->quality - 1;
-                    }
-                }
-            } else {
-                if ($item->quality < 50) {
-                    $item->quality = $item->quality + 1;
-                    if ($item->name == 'Backstage passes to a TAFKAL80ETC concert') {
-                        if ($item->sell_in < 11) {
-                            if ($item->quality < 50) {
-                                $item->quality = $item->quality + 1;
-                            }
-                        }
-                        if ($item->sell_in < 6) {
-                            if ($item->quality < 50) {
-                                $item->quality = $item->quality + 1;
-                            }
-                        }
-                    }
-                }
-            }
+            /*
+            Every item has 2 parameters that can change - sell_in and quality
+            For new parameters add them here.
+            */
+            $ChangeQuality = 0;
+            $ChangeSellin = 0;
 
-            if ($item->name != 'Sulfuras, Hand of Ragnaros') {
-                $item->sell_in = $item->sell_in - 1;
-            }
+            $name = $item->name;
+            $quality = $item->quality;
+            $sellin = $item->sell_in;
 
-            if ($item->sell_in < 0) {
-                if ($item->name != 'Aged Brie') {
-                    if ($item->name != 'Backstage passes to a TAFKAL80ETC concert') {
-                        if ($item->quality > 0) {
-                            if ($item->name != 'Sulfuras, Hand of Ragnaros') {
-                                $item->quality = $item->quality - 1;
-                            }
-                        }
-                    } else {
-                        $item->quality = $item->quality - $item->quality;
+            /*
+             For Each New item case: Add a case with parameters - ChangeQuality and ChangeSellin;
+             */
+
+            switch (true){
+
+                // Should never be sold and stay at quality 80
+                case $name === 'Sulfuras, Hand of Ragnaros' :
+
+                    // Prevents Sulfuras from being sold.
+                    if($sellin > 0){
+                        $sellin = 0;
                     }
-                } else {
-                    if ($item->quality < 50) {
-                        $item->quality = $item->quality + 1;
-                    }
-                }
+                    $quality = 80;
+                    continue 2;
+
+                default:
+                    $ChangeQuality = -1;
+                    $ChangeSellin = -1;
+
             }
+            /*
+            Updating the item.
+            In case of additional updates needed - add them here.
+            */
+
+            $sellin += $ChangeSellin;
+            $quality += $ChangeQuality;
+
+            /* Sulfuras (aka legendary item) must always remain 80 in quality and never be sold. */
+
+
         }
     }
 }
