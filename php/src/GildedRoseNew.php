@@ -84,6 +84,10 @@ final class GildedRoseNew
 
                     break;
 
+                // Should decrease in Quality twice as fast
+                case str_contains($name,'Conjured'):
+                    $ChangeQuality = -2;
+                    break;
 
                 default:
                     $ChangeQuality = -1;
