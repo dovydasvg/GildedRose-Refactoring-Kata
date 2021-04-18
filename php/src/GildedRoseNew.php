@@ -90,6 +90,12 @@ final class GildedRoseNew
                     $ChangeSellin = -1;
 
             }
+
+            // Once the sell by date has passed, Quality degrades twice as fast
+            if($sellin < 1){
+                $ChangeQuality *= 2;
+            }
+
             /*
             Updating the item.
             In case of additional updates needed - add them here.
