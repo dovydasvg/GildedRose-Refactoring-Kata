@@ -30,9 +30,11 @@ final class GildedRoseNew
             Every item has 2 parameters that can change - sell_in and quality
             For new parameters add them here.
             */
-            $ChangeQuality = 0;
-            $ChangeSellin = 0;
 
+            $ChangeQuality = -1;
+            $ChangeSellin = -1;
+
+            //Used for reading not for writing
             $name = $item->name;
             $quality = $item->quality;
             $sellin = $item->sell_in;
@@ -52,6 +54,11 @@ final class GildedRoseNew
                     }
                     $item->quality = 80;
                     continue 2;
+
+                // Should increase in quality over time
+                case $name === 'Aged Brie' :
+                    $ChangeQuality = 1;
+                    break;
 
                 default:
                     $ChangeQuality = -1;
