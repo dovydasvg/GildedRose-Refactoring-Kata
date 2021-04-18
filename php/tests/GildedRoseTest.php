@@ -97,7 +97,7 @@ class GildedRoseTest extends TestCase
         $this->assertEquals(50, $items[2]->quality);
 
         $this->assertEquals(0, $items[3]->sell_in);
-        $this->assertEquals(0, $items[3]->quality);
+        $this->assertEquals(43, $items[3]->quality);
     }
 
     /*
