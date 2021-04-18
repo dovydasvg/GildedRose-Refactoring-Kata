@@ -66,8 +66,8 @@ class GildedRoseTest extends TestCase
         $items = array(
             new Item('Backstage passes to a TAFKAL80ETC concert', 15, 20),
             new Item('Backstage passes to a Great concert', 10, 20),
-            new Item('Backstage passes to a Great concert', 5, 20),
-            new Item('Backstage passes to a Random concert', 1, 44),
+            new Item('Backstage passes to a Great concert', 5, 49),
+            new Item('Backstage passes to a Random concert', 1, 40),
         );
         $gildedRose = new GildedRoseNew($items);
         $gildedRose->updateQuality();
@@ -78,7 +78,7 @@ class GildedRoseTest extends TestCase
         $this->assertEquals(22, $items[1]->quality);
 
         $this->assertEquals(4, $items[2]->sell_in);
-        $this->assertEquals(23, $items[2]->quality);
+        $this->assertEquals(50, $items[2]->quality);
 
         $this->assertEquals(0, $items[3]->sell_in);
         $this->assertEquals(0, $items[3]->quality);
