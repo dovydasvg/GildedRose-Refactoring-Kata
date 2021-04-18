@@ -60,6 +60,31 @@ final class GildedRoseNew
                     $ChangeQuality = 1;
                     break;
 
+                // Should increase in Quality.
+                case str_contains($name,'Backstage passes'):
+
+                    /*
+                    Default - Quality +1
+                    If less than 11 days left - quality +2
+                    If less than 6 days left - Quality +3
+                    If 0 days left - Quality 0
+                    The sellin gets lower so an additional 1 is added.
+                     */
+
+                    if($sellin < 2 ){
+                        $item->quality = 0;
+                        $ChangeQuality = 0;
+                    }elseif($sellin < 7){
+                        $ChangeQuality = 3;
+                    }elseif ($sellin < 12){
+                        $ChangeQuality = 2;
+                    }else{
+                        $ChangeQuality = 1;
+                    }
+
+                    break;
+
+
                 default:
                     $ChangeQuality = -1;
                     $ChangeSellin = -1;
