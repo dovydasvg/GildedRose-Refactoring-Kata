@@ -8,6 +8,8 @@ use GildedRose\GildedRose;
 use GildedRose\Item;
 use PHPUnit\Framework\TestCase;
 
+use GildedRose\GildedRoseNew;
+
 class GildedRoseTest extends TestCase
 {
     public function testFoo(): void
@@ -24,7 +26,7 @@ class GildedRoseTest extends TestCase
     public function testSulfuras(): void
     {
         $items = [new Item('Sulfuras, Hand of Ragnaros', 0, 80)];
-        $gildedRose = new GildedRose($items);
+        $gildedRose = new GildedRoseNew($items);
         $gildedRose->updateQuality();
         $this->assertSame('Sulfuras, Hand of Ragnaros', $items[0]->name);
         $this->assertEquals(0, $items[0]->sell_in);
