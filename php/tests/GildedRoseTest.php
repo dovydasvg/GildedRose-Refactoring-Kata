@@ -100,4 +100,23 @@ class GildedRoseTest extends TestCase
         $this->assertEquals(0, $items[3]->quality);
     }
 
+    /*
+    "Conjured" items degrade in Quality twice as fast as normal items
+    */
+
+    public function testConjured(): void
+    {
+        $items = array(
+            new Item('Conjured vase', 15, 20),
+            new Item('Conjured silver sword', -2, 20),
+        );
+        $gildedRose = new GildedRoseNew($items);
+        $gildedRose->updateQuality();
+        $this->assertEquals(14, $items[0]->sell_in);
+        $this->assertEquals(18, $items[0]->quality);
+
+        $this->assertEquals(-3, $items[1]->sell_in);
+        $this->assertEquals(16, $items[1]->quality);
+    }
+
 }
