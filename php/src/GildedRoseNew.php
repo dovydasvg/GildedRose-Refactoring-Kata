@@ -98,6 +98,13 @@ final class GildedRoseNew
             $item->sell_in += $ChangeSellin;
             $item->quality += $ChangeQuality;
 
+            // Quality must be between 0 and 50
+            if($quality > 50){
+                $item->quality = 50;
+            }elseif($quality < 0){
+                $item->quality = 0;
+            }
+
 
 
         }
