@@ -1,4 +1,4 @@
-# GildedRose Kata - PHP Version
+# GildedRose Kata - PHP Version - SOLVED
 
 See the [top level readme](../README.md) for general information about this exercise. This is the PHP version of the
  GildedRose Kata. 
@@ -15,14 +15,8 @@ Recommended:
 
 Clone the repository
 
-```sh
-git clone git@github.com:emilybache/GildedRose-Refactoring-Kata.git
-```
-
-or
-
 ```shell script
-git clone https://github.com/emilybache/GildedRose-Refactoring-Kata.git
+git clone https://github.com/dovydasvg/GildedRose-Refactoring-Kata
 ```
 
 Install all the dependencies using composer
@@ -46,28 +40,30 @@ The project uses composer to install:
 
 - `src` - contains the two classes:
   - `Item.php` - this class should not be changed.
-  - `GildedRose.php` - this class needs to be refactored, and the new feature added.
+  - `GildedRose.php` - the refactored and updated with new functionality class.
+  - `GildedRoseLegacy.php` - the original class that was refactored.
 - `tests` - contains the tests
-  - `GildedRoseTest.php` - Starter test.
+  - `GildedRoseTest.php` - Starter tests. Checks every case specifically.
   - `ApprovalTest.php` - alternative approval test (set to 30 days)
 - `Fixture`
   - `texttest_fixture.php` used by the approval test, or can be run from the command line
 
-## Testing
+## How to use this code
 
-PHPUnit is pre-configured to run tests. PHPUnit can be run using a composer script. To run the unit tests, from the
- root of the PHP project run:
+Use the GildedRose class to keep your inventory up to date.
+After each day run the method updateQuality to update all of your items sellin dates and Quality.
+The Quality of each item updates according to the rules defined as cases in the method.
+
+To add new rules -> add a new case to the switch statement.
+Each new rule should have a test to double-check it. Add the test to `GildedRoseTest.php`.
+
+To Check if it all works just run PHPUnit tests:
 
 ```shell script
 composer test
 ```
 
-On Windows a batch file has been created, similar to an alias on Linux/Mac (e.g. `alias pu="composer test"`), the same
- PHPUnit `composer test` can be run:
 
-```shell script
-pu
-```
 
 ### Tests with Coverage Report
 
