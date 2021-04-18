@@ -56,4 +56,32 @@ class GildedRoseTest extends TestCase
         $this->assertEquals(16, $items[0]->quality);
     }
 
+    /*
+     Backstage passes should increase in Quality.
+     If <11 days left - by 2; if <6 days by 3;
+     If sellin time is <1 the quality should be 0;
+     */
+    public function testBackStage(): void
+    {
+        $items = array(
+            new Item('Backstage passes to a TAFKAL80ETC concert', 15, 20),
+            new Item('Backstage passes to a Great concert', 10, 20),
+            new Item('Backstage passes to a Great concert', 5, 20),
+            new Item('Backstage passes to a Random concert', 1, 44),
+        );
+        $gildedRose = new GildedRoseNew($items);
+        $gildedRose->updateQuality();
+        $this->assertEquals(14, $items[0]->sell_in);
+        $this->assertEquals(21, $items[0]->quality);
+
+        $this->assertEquals(9, $items[1]->sell_in);
+        $this->assertEquals(22, $items[1]->quality);
+
+        $this->assertEquals(4, $items[2]->sell_in);
+        $this->assertEquals(23, $items[2]->quality);
+
+        $this->assertEquals(0, $items[3]->sell_in);
+        $this->assertEquals(0, $items[3]->quality);
+    }
+
 }
