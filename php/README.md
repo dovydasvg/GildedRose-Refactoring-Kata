@@ -65,7 +65,7 @@ composer test
 
 
 
-### Tests with Coverage Report
+## Tests with Coverage Report
 
 To run all test and generate a html coverage report run:
 
