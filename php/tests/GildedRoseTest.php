@@ -28,7 +28,8 @@ class GildedRoseTest extends TestCase
     {
         $items = array(
             new Item('Random default item', 10, 40),
-            new Item('Random default item', 5, 0),
+            new Item('Shitty default item', 5, 0),
+            new Item('Fast degrading default item', -5, 20),
         );
         $gildedRose = new GildedRoseNew($items);
         $gildedRose->updateQuality();
@@ -38,6 +39,9 @@ class GildedRoseTest extends TestCase
 
         $this->assertEquals(4, $items[1]->sell_in);
         $this->assertEquals(0, $items[1]->quality);
+
+        $this->assertEquals(-6, $items[2]->sell_in);
+        $this->assertEquals(18, $items[2]->quality);
     }
 
     /* Sulfuras must never be sold and keep a quality of 80*/
