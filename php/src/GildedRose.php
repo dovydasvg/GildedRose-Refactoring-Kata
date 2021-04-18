@@ -16,6 +16,7 @@ final class GildedRose
         $this->items = $items;
     }
 
+    /** @noinspection PhpUnusedLocalVariableInspection */
     public function updateQuality(): void
     {
         /**
@@ -36,7 +37,6 @@ final class GildedRose
 
             //Used for reading not for writing
             $name = $item->name;
-            $quality = $item->quality;
             $sellin = $item->sell_in;
 
             /*
