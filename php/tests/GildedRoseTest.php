@@ -45,4 +45,15 @@ class GildedRoseTest extends TestCase
         $this->assertEquals(80, $items[0]->quality);
     }
 
+    /* Aged Brie should increase in quality */
+    public function testAgedBrie(): void
+    {
+        $items = [new Item('Aged Brie', 10, 15)];
+        $gildedRose = new GildedRoseNew($items);
+        $gildedRose->updateQuality();
+        $this->assertSame('Aged Brie', $items[0]->name);
+        $this->assertEquals(9, $items[0]->sell_in);
+        $this->assertEquals(16, $items[0]->quality);
+    }
+
 }

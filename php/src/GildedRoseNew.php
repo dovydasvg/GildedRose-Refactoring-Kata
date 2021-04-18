@@ -66,7 +66,6 @@ final class GildedRoseNew
             $item->sell_in += $ChangeSellin;
             $item->quality += $ChangeQuality;
 
-            /* Sulfuras (aka legendary item) must always remain 80 in quality and never be sold. */
 
 
         }
