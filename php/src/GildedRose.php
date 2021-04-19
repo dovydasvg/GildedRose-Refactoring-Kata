@@ -37,25 +37,22 @@ final class GildedRose
 
                 case $item->name === 'Sulfuras, Hand of Ragnaros':
                     $this->updateSulfuras($item);
-                    continue 2;
+                    break;
 
                 case $item->name === 'Aged Brie':
                     $this->updateBrie($item);
-                    continue 2;
+                    break;
 
-                // Should increase in Quality.
                 case str_contains($item->name, 'Backstage passes'):
                     $this->updateBackstage($item);
-                    continue 2;
+                    break;
 
-                // Should decrease in Quality twice as fast
                 case str_contains($item->name, 'Conjured'):
                     $this->updateConjured($item);
-                    continue 2;
+                    break;
 
                 default:
                     $this->updateDefault($item);
-                    continue 2;
             }
 
         }
@@ -74,7 +71,7 @@ final class GildedRose
     // Should increase in quality over time. Standart update rules.
     private function updateBrie($item)
     {
-        $item->sell_in -= 1;
+        $this->lowerSellin($item);
 
         $this->expiredDoubles($item, 1);
 
@@ -116,6 +113,13 @@ final class GildedRose
         $this->checkQualityLimits($item);
     }
 
+    private function updateDefault($item)
+    {
+        $item->sell_in -= 1;
+        $this->expiredDoubles($item, -1);
+        $this->checkQualityLimits($item);
+    }
+
     // Checks if an item's Quality is not above 50 or bellow 0
     private function checkQualityLimits($item)
     {
@@ -142,12 +146,17 @@ final class GildedRose
 
     }
 
-    private function updateDefault($item)
+
+    /**
+     * @param $item - item object
+     * @param int $lowerBy, default = 1
+     */
+    private function lowerSellin($item, $lowerBy=1)
     {
-        $item->sell_in -= 1;
-        $this->expiredDoubles($item, -1);
-        $this->checkQualityLimits($item);
+        $item->sell_in -= $lowerBy;
     }
+
+
 
 
 }
