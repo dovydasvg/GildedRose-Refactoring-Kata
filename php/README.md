@@ -52,62 +52,16 @@ The project uses composer to install:
 
 Use the GildedRose class to keep your inventory up to date.
 After each day run the method updateQuality to update all of your items sellin dates and Quality.
-The Quality of each item updates according to the rules defined as cases in the method.
+The Quality of each item updates according to the rules defined in separate methods in `GildedRose.php`
 
-To add new rules -> add a new case to the switch statement.
+To add new rules -> add a new case to the updateSwitch method in `GildedRose.php`.
+
 Each new rule should have a test to double-check it. Add the test to `GildedRoseTest.php`.
 
 To Check if it all works just run PHPUnit tests:
 
 ```shell script
 composer test
-```
-
-
-
-## Tests with Coverage Report
-
-To run all test and generate a html coverage report run:
-
-```shell script
-composer test-coverage
-```
-
-The test-coverage report will be created in /builds, it is best viewed by opening **index.html** in your browser.
-
-## Code Standard
-
-Easy Coding Standard (ECS) is used to check for style and code standards, **PSR-12** is used. The current code is not
- upto standard!
-
-### Check Code
-
-To check code, but not fix errors:
-
-```shell script
-composer check-cs
-``` 
-
-On Windows a batch file has been created, similar to an alias on Linux/Mac (e.g. `alias cc="composer check-cs"`), the
- same PHPUnit `composer check-cs` can be run:
-
-```shell script
-cc
-```
-
-### Fix Code
-
-There are may code fixes automatically provided by ECS, if advised to run --fix, the following script can be run:
-
-```shell script
-composer fix-cs
-```
-
-On Windows a batch file has been created, similar to an alias on Linux/Mac (e.g. `alias fc="composer fix-cs"`), the same
- PHPUnit `composer fix-cs` can be run:
-
-```shell script
-fc
 ```
 
 ## Static Analysis
