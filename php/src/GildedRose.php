@@ -45,39 +45,19 @@ final class GildedRose
 
             switch (true) {
 
-                // Should never be sold and stay at quality 80
+
                 case $name === 'Sulfuras, Hand of Ragnaros':
                     $this->updateSulfuras($item);
                     continue 2;
 
-                // Should increase in quality over time
                 case $name === 'Aged Brie':
                     $this->updateBrie($item);
                     continue 2;
 
                 // Should increase in Quality.
                 case str_contains($name, 'Backstage passes'):
-
-                    /*
-                    Default - Quality +1
-                    If less than 11 days left - quality +2
-                    If less than 6 days left - Quality +3
-                    If 0 days left - Quality 0
-                    The sellin gets lower so an additional 1 is added.
-                     */
-
-                    if ($sellin < 1) {
-                        $item->quality = 0;
-                        $ChangeQuality = 0;
-                    } elseif ($sellin < 6) {
-                        $ChangeQuality = 3;
-                    } elseif ($sellin < 11) {
-                        $ChangeQuality = 2;
-                    } else {
-                        $ChangeQuality = 1;
-                    }
-
-                    break;
+                    $this->updateBackstage($item);
+                    continue 2;
 
                 // Should decrease in Quality twice as fast
                 case str_contains($name, 'Conjured'):
@@ -112,6 +92,7 @@ final class GildedRose
         }
     }
 
+    // Should never be sold and stay at quality 80
     private function updateSulfuras($item)
     {
         // Prevents Sulfuras from being sold.
@@ -121,6 +102,7 @@ final class GildedRose
         $item->quality = 80;
     }
 
+    // Should increase in quality over time. Standart update rules.
     private function updateBrie($item)
     {
         $item->sell_in -= 1;
@@ -142,6 +124,31 @@ final class GildedRose
         }elseif ($item->quality < 0){
             $item->quality = 0;
         }
+    }
+
+    private function updateBackstage($item)
+    {
+
+        /*
+        Default - Quality +1
+        If less than 11 days left - quality +2
+        If less than 6 days left - Quality +3
+        If 0 days left - Quality 0
+         */
+
+        $item->sell_in -= 1;
+
+        if ($item->sell_in < 0) {
+            $item->quality = 0;
+        } elseif ($item->sell_in < 5) {
+            $item->quality += 3;
+        } elseif ($item->sell_in < 10) {
+            $item->quality += 2;
+        } else {
+            $item->quality += 1;
+        }
+
+        $this->checkQualityLimits($item);
     }
 
 
