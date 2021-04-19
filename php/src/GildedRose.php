@@ -57,7 +57,7 @@ final class GildedRose
     }
 
     // Should never be sold and stay at quality 80
-    private function updateSulfuras(Item $item)
+    private function updateSulfuras(Item $item): void
     {
         // Prevents Sulfuras from being sold.
         if ($item->sell_in > 0) {
@@ -67,7 +67,7 @@ final class GildedRose
     }
 
     // Should increase in quality over time. Standart update rules.
-    private function updateBrie(Item $item)
+    private function updateBrie(Item $item): void
     {
         $this->lowerSellin($item);
 
@@ -77,7 +77,7 @@ final class GildedRose
     }
 
 
-    private function updateBackstage(Item $item)
+    private function updateBackstage(Item $item): void
     {
 
         /*
@@ -103,14 +103,14 @@ final class GildedRose
     }
 
     // Quality gets worst twice faster
-    private function updateConjured(Item $item)
+    private function updateConjured(Item $item): void
     {
         $this->lowerSellin($item);
         $this->expiredDoubles($item, -2);
         $this->checkQualityLimits($item);
     }
 
-    private function updateDefault(Item $item)
+    private function updateDefault(Item $item): void
     {
         $this->lowerSellin($item);
         $this->expiredDoubles($item, -1);
@@ -118,7 +118,7 @@ final class GildedRose
     }
 
     // Checks if an item's Quality is not above 50 or bellow 0
-    private function checkQualityLimits(Item $item)
+    private function checkQualityLimits(Item $item): void
     {
         if($item->quality > 50){
             $item->quality = 50;
@@ -133,7 +133,7 @@ final class GildedRose
      * @param $item - item object
      * @param $qualityChange - int, which changes quality of item
      */
-    private function expiredDoubles(Item $item, $qualityChange)
+    private function expiredDoubles(Item $item, $qualityChange): void
     {
         if($item->sell_in < 0){
             $item->quality += $qualityChange*2;
@@ -148,7 +148,7 @@ final class GildedRose
      * @param $item - item object
      * @param int $lowerBy, default = 1
      */
-    private function lowerSellin(Item $item, $lowerBy=1)
+    private function lowerSellin(Item $item, $lowerBy=1): void
     {
         $item->sell_in -= $lowerBy;
     }
