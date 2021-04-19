@@ -159,7 +159,7 @@ final class GildedRose
      * Add new cases here.
      * @param Item $item
      */
-    private function updateSwitch(Item $item)
+    private function updateSwitch(Item $item): void
     {
         switch (true) {
 
