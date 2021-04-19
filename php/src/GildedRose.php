@@ -28,30 +28,7 @@ final class GildedRose
 
         foreach ($this->items as $item) {
 
-            /*
-             For Each New item case: Add a case with separate method.
-             */
-            switch (true) {
-
-                case $item->name === 'Sulfuras, Hand of Ragnaros':
-                    $this->updateSulfuras($item);
-                    break;
-
-                case $item->name === 'Aged Brie':
-                    $this->updateBrie($item);
-                    break;
-
-                case str_contains($item->name, 'Backstage passes'):
-                    $this->updateBackstage($item);
-                    break;
-
-                case str_contains($item->name, 'Conjured'):
-                    $this->updateConjured($item);
-                    break;
-
-                default:
-                    $this->updateDefault($item);
-            }
+            $this->updateSwitch($item);
 
         }
     }
@@ -175,6 +152,36 @@ final class GildedRose
     private function lowerSellin(Item $item, $lowerBy=1): void
     {
         $item->sell_in -= $lowerBy;
+    }
+
+    /**
+     * @description Updated each item depending on a case.
+     * Add new cases here.
+     * @param Item $item
+     */
+    private function updateSwitch(Item $item)
+    {
+        switch (true) {
+
+            case $item->name === 'Sulfuras, Hand of Ragnaros':
+                $this->updateSulfuras($item);
+                break;
+
+            case $item->name === 'Aged Brie':
+                $this->updateBrie($item);
+                break;
+
+            case str_contains($item->name, 'Backstage passes'):
+                $this->updateBackstage($item);
+                break;
+
+            case str_contains($item->name, 'Conjured'):
+                $this->updateConjured($item);
+                break;
+
+            default:
+                $this->updateDefault($item);
+        }
     }
 
 
