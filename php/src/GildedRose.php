@@ -61,8 +61,8 @@ final class GildedRose
 
                 // Should decrease in Quality twice as fast
                 case str_contains($name, 'Conjured'):
-                    $ChangeQuality = -2;
-                    break;
+                    $this->updateConjured($item);
+                    continue 2;
 
                 default:
                     $ChangeQuality = -1;
@@ -113,16 +113,6 @@ final class GildedRose
     }
 
 
-    // Checks if an item's Quality is not above 50 or bellow 0
-    private function checkQualityLimits($item)
-    {
-        if($item->quality > 50){
-            $item->quality = 50;
-        }elseif ($item->quality < 0){
-            $item->quality = 0;
-        }
-    }
-
     private function updateBackstage($item)
     {
 
@@ -148,7 +138,22 @@ final class GildedRose
         $this->checkQualityLimits($item);
     }
 
-    // Doubles the rate of quality change if item expired
+    // Checks if an item's Quality is not above 50 or bellow 0
+    private function checkQualityLimits($item)
+    {
+        if($item->quality > 50){
+            $item->quality = 50;
+        }elseif ($item->quality < 0){
+            $item->quality = 0;
+        }
+    }
+
+
+    /**
+     * @description Doubles the rate of quality change if item expired
+     * @param $item - item object
+     * @param $qualityChange - int, which changes quality of item
+     */
     private function expiredDoubles($item, $qualityChange)
     {
         if($item->sell_in < 0){
@@ -157,6 +162,14 @@ final class GildedRose
             $item->quality += $qualityChange;
         }
 
+    }
+
+    private function updateConjured($item)
+    {
+        $item->sell_in -= 1;
+
+        $this->expiredDoubles($item, -2);
+        $this->checkQualityLimits($item);
     }
 
 
