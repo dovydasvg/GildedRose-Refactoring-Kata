@@ -89,7 +89,7 @@ final class GildedRose
         If 0 days left - Quality 0
          */
 
-        $item->sell_in -= 1;
+        $this->lowerSellin();
 
         if ($item->sell_in < 0) {
             $item->quality = 0;
@@ -107,15 +107,14 @@ final class GildedRose
     // Quality gets worst twice faster
     private function updateConjured($item)
     {
-        $item->sell_in -= 1;
-
+        $this->lowerSellin($item);
         $this->expiredDoubles($item, -2);
         $this->checkQualityLimits($item);
     }
 
     private function updateDefault($item)
     {
-        $item->sell_in -= 1;
+        $this->lowerSellin($item);
         $this->expiredDoubles($item, -1);
         $this->checkQualityLimits($item);
     }
