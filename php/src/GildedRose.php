@@ -27,40 +27,29 @@ final class GildedRose
          */
 
         foreach ($this->items as $item) {
-            /*
-            Every item has 2 parameters that can change - sell_in and quality
-            For new parameters add them here.
-            */
-
-            $ChangeQuality = -1;
-            $ChangeSellin = -1;
-
-            //Used for reading not for writing
-            $name = $item->name;
-            $sellin = $item->sell_in;
 
             /*
-             For Each New item case: Add a case with parameters - ChangeQuality and ChangeSellin;
+             For Each New item case: Add a case with separate method.
              */
 
             switch (true) {
 
 
-                case $name === 'Sulfuras, Hand of Ragnaros':
+                case $item->name === 'Sulfuras, Hand of Ragnaros':
                     $this->updateSulfuras($item);
                     continue 2;
 
-                case $name === 'Aged Brie':
+                case $item->name === 'Aged Brie':
                     $this->updateBrie($item);
                     continue 2;
 
                 // Should increase in Quality.
-                case str_contains($name, 'Backstage passes'):
+                case str_contains($item->name, 'Backstage passes'):
                     $this->updateBackstage($item);
                     continue 2;
 
                 // Should decrease in Quality twice as fast
-                case str_contains($name, 'Conjured'):
+                case str_contains($item->name, 'Conjured'):
                     $this->updateConjured($item);
                     continue 2;
 
@@ -71,25 +60,6 @@ final class GildedRose
                     continue 2;
             }
 
-            // Once the sell by date has passed, Quality degrades twice as fast
-            if ($sellin < 1) {
-                $ChangeQuality *= 2;
-            }
-
-            /*
-            Updating the item.
-            In case of additional updates needed - add them here.
-            */
-
-            $item->sell_in += $ChangeSellin;
-            $item->quality += $ChangeQuality;
-
-            // Quality must be between 0 and 50
-            if ($item->quality > 50) {
-                $item->quality = 50;
-            } elseif ($item->quality < 0) {
-                $item->quality = 0;
-            }
         }
     }
 
