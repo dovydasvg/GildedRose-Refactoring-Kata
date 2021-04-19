@@ -65,9 +65,10 @@ final class GildedRose
                     continue 2;
 
                 default:
-                    $ChangeQuality = -1;
-                    $ChangeSellin = -1;
-
+                    $item->sell_in -= 1;
+                    $this->expiredDoubles($item, -1);
+                    $this->checkQualityLimits($item);
+                    continue 2;
             }
 
             // Once the sell by date has passed, Quality degrades twice as fast
