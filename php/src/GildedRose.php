@@ -31,9 +31,7 @@ final class GildedRose
             /*
              For Each New item case: Add a case with separate method.
              */
-
             switch (true) {
-
 
                 case $item->name === 'Sulfuras, Hand of Ragnaros':
                     $this->updateSulfuras($item);
@@ -59,7 +57,7 @@ final class GildedRose
     }
 
     // Should never be sold and stay at quality 80
-    private function updateSulfuras($item)
+    private function updateSulfuras(Item $item)
     {
         // Prevents Sulfuras from being sold.
         if ($item->sell_in > 0) {
@@ -69,7 +67,7 @@ final class GildedRose
     }
 
     // Should increase in quality over time. Standart update rules.
-    private function updateBrie($item)
+    private function updateBrie(Item $item)
     {
         $this->lowerSellin($item);
 
@@ -79,7 +77,7 @@ final class GildedRose
     }
 
 
-    private function updateBackstage($item)
+    private function updateBackstage(Item $item)
     {
 
         /*
@@ -89,7 +87,7 @@ final class GildedRose
         If 0 days left - Quality 0
          */
 
-        $this->lowerSellin();
+        $this->lowerSellin($item);
 
         if ($item->sell_in < 0) {
             $item->quality = 0;
@@ -105,14 +103,14 @@ final class GildedRose
     }
 
     // Quality gets worst twice faster
-    private function updateConjured($item)
+    private function updateConjured(Item $item)
     {
         $this->lowerSellin($item);
         $this->expiredDoubles($item, -2);
         $this->checkQualityLimits($item);
     }
 
-    private function updateDefault($item)
+    private function updateDefault(Item $item)
     {
         $this->lowerSellin($item);
         $this->expiredDoubles($item, -1);
@@ -120,7 +118,7 @@ final class GildedRose
     }
 
     // Checks if an item's Quality is not above 50 or bellow 0
-    private function checkQualityLimits($item)
+    private function checkQualityLimits(Item $item)
     {
         if($item->quality > 50){
             $item->quality = 50;
@@ -135,7 +133,7 @@ final class GildedRose
      * @param $item - item object
      * @param $qualityChange - int, which changes quality of item
      */
-    private function expiredDoubles($item, $qualityChange)
+    private function expiredDoubles(Item $item, $qualityChange)
     {
         if($item->sell_in < 0){
             $item->quality += $qualityChange*2;
@@ -150,7 +148,7 @@ final class GildedRose
      * @param $item - item object
      * @param int $lowerBy, default = 1
      */
-    private function lowerSellin($item, $lowerBy=1)
+    private function lowerSellin(Item $item, $lowerBy=1)
     {
         $item->sell_in -= $lowerBy;
     }
