@@ -41,7 +41,6 @@ The project uses composer to install:
 - `src` - contains the two classes:
   - `Item.php` - this class should not be changed.
   - `GildedRose.php` - the refactored and updated with new functionality class.
-  - `GildedRoseLegacy.php` - the original class that was refactored.
 - `tests` - contains the tests
   - `GildedRoseTest.php` - Starter tests. Checks every case specifically.
   - `ApprovalTest.php` - alternative approval test (set to 30 days)
