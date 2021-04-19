@@ -52,8 +52,8 @@ final class GildedRose
 
                 // Should increase in quality over time
                 case $name === 'Aged Brie':
-                    $ChangeQuality = 1;
-                    break;
+                    $this->updateBrie($item);
+                    continue 2;
 
                 // Should increase in Quality.
                 case str_contains($name, 'Backstage passes'):
@@ -119,5 +119,16 @@ final class GildedRose
             $item->sell_in = 0;
         }
         $item->quality = 80;
+    }
+
+    private function updateBrie($item)
+    {
+        $item->sell_in -= 1;
+
+        if($item->sell_in < 1){
+            $item->quality += 2;
+        }else{
+            $item->quality += 1;
+        }
     }
 }
