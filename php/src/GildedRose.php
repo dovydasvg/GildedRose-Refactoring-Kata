@@ -47,12 +47,7 @@ final class GildedRose
 
                 // Should never be sold and stay at quality 80
                 case $name === 'Sulfuras, Hand of Ragnaros':
-
-                    // Prevents Sulfuras from being sold.
-                    if ($sellin > 0) {
-                        $item->sell_in = 0;
-                    }
-                    $item->quality = 80;
+                    $this->updateSulfuras($item);
                     continue 2;
 
                 // Should increase in quality over time
@@ -115,5 +110,14 @@ final class GildedRose
                 $item->quality = 0;
             }
         }
+    }
+
+    private function updateSulfuras($item)
+    {
+        // Prevents Sulfuras from being sold.
+        if ($item->sell_in > 0) {
+            $item->sell_in = 0;
+        }
+        $item->quality = 80;
     }
 }
