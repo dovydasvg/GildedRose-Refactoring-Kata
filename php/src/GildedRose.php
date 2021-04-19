@@ -54,9 +54,7 @@ final class GildedRose
                     continue 2;
 
                 default:
-                    $item->sell_in -= 1;
-                    $this->expiredDoubles($item, -1);
-                    $this->checkQualityLimits($item);
+                    $this->updateDefault($item);
                     continue 2;
             }
 
@@ -109,6 +107,15 @@ final class GildedRose
         $this->checkQualityLimits($item);
     }
 
+    // Quality gets worst twice faster
+    private function updateConjured($item)
+    {
+        $item->sell_in -= 1;
+
+        $this->expiredDoubles($item, -2);
+        $this->checkQualityLimits($item);
+    }
+
     // Checks if an item's Quality is not above 50 or bellow 0
     private function checkQualityLimits($item)
     {
@@ -135,11 +142,10 @@ final class GildedRose
 
     }
 
-    private function updateConjured($item)
+    private function updateDefault($item)
     {
         $item->sell_in -= 1;
-
-        $this->expiredDoubles($item, -2);
+        $this->expiredDoubles($item, -1);
         $this->checkQualityLimits($item);
     }
 
