@@ -107,11 +107,8 @@ final class GildedRose
     {
         $item->sell_in -= 1;
 
-        if($item->sell_in < 0){
-            $item->quality += 2;
-        }else{
-            $item->quality += 1;
-        }
+        $this->expiredDoubles($item, 1);
+
         $this->checkQualityLimits($item);
     }
 
@@ -149,6 +146,17 @@ final class GildedRose
         }
 
         $this->checkQualityLimits($item);
+    }
+
+    // Doubles the rate of quality change if item expired
+    private function expiredDoubles($item, $qualityChange)
+    {
+        if($item->sell_in < 0){
+            $item->quality += $qualityChange*2;
+        }else{
+            $item->quality += $qualityChange;
+        }
+
     }
 
 
