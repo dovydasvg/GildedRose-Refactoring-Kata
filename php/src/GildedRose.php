@@ -125,10 +125,24 @@ final class GildedRose
     {
         $item->sell_in -= 1;
 
-        if($item->sell_in < 1){
+        if($item->sell_in < 0){
             $item->quality += 2;
         }else{
             $item->quality += 1;
         }
+        $this->checkQualityLimits($item);
     }
+
+
+    // Checks if an item's Quality is not above 50 or bellow 0
+    private function checkQualityLimits($item)
+    {
+        if($item->quality > 50){
+            $item->quality = 50;
+        }elseif ($item->quality < 0){
+            $item->quality = 0;
+        }
+    }
+
+
 }
